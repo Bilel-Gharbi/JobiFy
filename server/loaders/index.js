@@ -1,18 +1,10 @@
-const express = require("express");
-const fs = require("fs");
-const path = require("path");
-const cors = require("cors");
-const morgan = require("morgan");
-
-//tranking request optional
-// we create file and save all request history into access.log
-const accessLogStream = fs.createWriteStream(
-  path.join(__dirname, "access.log"),
-  { flags: "a" }
-);
+const expressLoader = require("./express");
 
 module.exports = async app => {
-  app.use(cors("*"));
-  app.use(morgan("dev"));
-  app.use(express.json());
+  try {
+    await expressLoader(app);
+    console.log("Experss App Intialized");
+  } catch (err) {
+    console.log(err);
+  }
 };
