@@ -5,7 +5,8 @@ route.post("/user", async (req, res) => {
   console.log(req.body);
   try {
     newUser = await userOperation.createNewUser(req.body);
-    res.status(201).json({ msg: "new user created .... ", user });
+    console.log(newUser);
+    res.status(201).json({ msg: "new user created .... ", newUser });
   } catch (err) {
     res.status(400).json(err);
   }
