@@ -4,6 +4,10 @@ const path = require("path");
 const cors = require("cors");
 const morgan = require("morgan");
 
+//route//
+
+const userRoute = require("../api/user");
+
 //tranking request optional
 // we create file and save all request history into access.log
 const accessLogStream = fs.createWriteStream(
@@ -16,4 +20,5 @@ module.exports = async app => {
   app.use(cors("*"));
   app.use(morgan("dev"));
   /* add route  */
+  app.use("/api", userRoute);
 };
