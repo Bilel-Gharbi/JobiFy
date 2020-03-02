@@ -1,24 +1,12 @@
-const route = require("express").Router();
-const { userOperation } = require("../operations");
+const userRouter = require("express").Router();
+//const { userOperation } = require("../operations");
+const { createNewUser, getAllUser } = require("../controllers/user");
+//import userController as controller
+const { userController: controller } = require("../controllers");
 
-route.post("/user", async (req, res) => {
-  console.log(req.body);
-  try {
-    newUser = await userOperation.createNewUser(req.body);
-    console.log(newUser);
-    res.status(201).json({ msg: "new user created .... ", newUser });
-  } catch (err) {
-    res.status(400).json(err);
-  }
-});
+userRouter
+  .route("/user")
+  .post(controller.createNewUser)
+  .get(controller.getAllUser);
 
-route.get("/user", async (req, res) => {
-  try {
-    users = await userOperation.getAllUser();
-    res.status(200).json(users);
-  } catch (err) {
-    res.status(400).json(err);
-  }
-});
-
-module.exports = route;
+module.exports = userRouter;

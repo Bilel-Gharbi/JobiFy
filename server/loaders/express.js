@@ -6,7 +6,7 @@ const morgan = require("morgan");
 
 //route//
 
-const userRoute = require("../api/user");
+const userRouter = require("../api/user");
 
 //tranking request optional
 // we create file and save all request history into access.log
@@ -19,6 +19,6 @@ module.exports = async app => {
   app.use(express.json());
   app.use(cors("*"));
   app.use(morgan("dev"));
-  /* add route  */
-  app.use("/api", userRoute);
+  /* add routes  */
+  app.use("/api", userRouter);
 };
