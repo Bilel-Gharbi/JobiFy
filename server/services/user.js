@@ -8,15 +8,12 @@ const createUser = async (name, surname) => {
   // force: true will drop the table if it already exists
   /*   TODO: function that check if the table created or not */
   try {
-    result = await User.sync({ force: false }).then(() => {
-      // Table created
-      return User.create({
-        firstName: name,
-        lastName: surname
-      });
+    await User.sync({ force: false });
+    // Table created
+    return User.create({
+      firstName: name,
+      lastName: surname
     });
-
-    return result;
   } catch (err) {
     console.log("UserService/createUser Error ", err);
   }
