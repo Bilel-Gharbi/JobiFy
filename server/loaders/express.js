@@ -2,11 +2,9 @@ const express = require("express");
 const fs = require("fs");
 const path = require("path");
 const cors = require("cors");
-const morgan = require("morgan");
 
-//route//
-
-const userRouter = require("../api/user");
+const logger = require("morgan"); //middleware
+const API = require("../api");
 
 //tranking request optional
 // we create file and save all request history into access.log
@@ -18,7 +16,7 @@ const accessLogStream = fs.createWriteStream(
 module.exports = async app => {
   app.use(express.json());
   app.use(cors("*"));
-  app.use(morgan("dev"));
+  app.use(logger("dev"));
   /* add routes  */
-  app.use("/api", userRouter);
+  app.use("/api/user", API.userRouter);
 };
